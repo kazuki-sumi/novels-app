@@ -1,10 +1,68 @@
+<h1><%= @user.name %>のページ</h1>
 <div class="user-personal">
-    <div class="user-left">
+    <aside class="col-md-4">
         <div class="icon">
             <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
         </div>
         <div class="name">
             <h1><%= @user.name %></h1>
+        </div>
+        <% if current_user.id == @user.id %>
+            <div class="novel-menu">
+                <h4>メニュー</h4>
+                <%= link_to '小説を投稿する', new_novel_path, class: 'label label-default' %><br> 
+                <%= link_to 'ユーザ登録を削除する', user_path, method: :delete, class: 'label label-warning' %><br>
+                <%= form_for @user,:url => {:action => 'update'}, :html => {:multipart => true} do |f|  %>
+                    <%= f.label '画像を変更する' %>
+                    <%= f.file_field :image %><br>
+                    <%= f.submit '画像を変える', class: 'btn btn-success' %>
+                <% end %>
+            </div>
+        <% end %>
+    </aside>
+    <div class="user-center col-xs-8">
+        <div class="favorite-novels">
+            <h3>お気に入り小説一覧</h3>
+            <% @user.favorite_novels.each do |favorite_novel| %>
+                <ul class="media">
+                        <div class="media-left">
+                            <img class="media-object img-rounded" src="<%= gravatar_url(favorite_novel.user, {size: 70}) %>" alt="">
+                        </div>
+                        <div class="media-body">
+                            <span>作者:</span><%= link_to favorite_novel.user.name, "/users/#{favorite_novel.user_id}" %><br>
+                            <span class="text-muted">投稿日 <%= favorite_novel.created_at %></span><br>
+                            <span class="text-muted">更新日 <%= favorite_novel.updated_at %></span><br>
+                            <span>タイトル:</span><%= link_to favorite_novel.title, "/novels/#{favorite_novel.id}" %>
+                        </div>
+                </ul>
+            <% end %>
+        </div>
+        <div class="posted-novels">
+            <h3>投稿した小説一覧</h3>
+            <div class="novels-list">
+                <% @novels.each do |novel| %>
+                    <ul class="media">
+                        <div class="media-left">
+                            <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
+                        </div>
+                        <div class="media-body">
+                            <div>
+                                <span>作者：</span><%= link_to novel.user.name, user_path %><br>
+                                <span class="text-muted">投稿日</span> <%= novel.created_at %><br>
+                                <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
+                                <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
+                            </div><br>
+                            <% if current_user.id == novel.user_id %>
+                                <%= link_to 'この小説を編集する', "/novels/#{novel.id}/edit", class: 'btn btn-default' %>
+                                <%= link_to 'この小説を削除する', "/novels/#{novel.id}", method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: 'btn btn-danger' %>
+                            <% end %>
+                            <% unless current_user.id == novel.user_id%>
+                                <%= render 'favorites/favorite_button', novel: novel %>
+                            <% end %>
+                        </div>
+                    </ul>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>

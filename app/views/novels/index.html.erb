@@ -1,0 +1,25 @@
+<div class ="search-form text-center">
+    <h3>タイトル検索</h3>
+    <%= form_tag(novels_path, method: :get) do %>
+        <span class="glyphicon glyphicon-search"></span><%= text_field_tag :q %>
+        <%= submit_tag "検索する" %>
+    <% end %>
+</div><br>
+<div class="novel-list">
+    <% @novels.each do |novel| %>
+        <ul class="media">
+            <div class="media-left">
+                <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
+            </div>
+            <div class="media-body">
+                <span>作者:</span><%= link_to novel.user.name, "/users/#{novel.user_id}" %><br>
+                <span class="text-muted">投稿日 <%= novel.created_at %></span><br>
+                <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
+                <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
+            </div><br>
+            <% unless current_user.id == novel.user_id %>
+                <%= render 'favorites/favorite_button', novel: novel %>
+            <% end %>
+        </ul>
+    <% end %>
+</div>

@@ -11,13 +11,19 @@
         
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="#">ホーム</a></li>
-          <li><a href="#">マイページ</a></li>
-          <li><a href="#">小説一覧</a></li>
-          <li><a href="#">ランキング</a></li>
-          <li><%= link_to 'ユーザー登録', signup_path %></li>
-        </ul>
+
+          <ul class="nav navbar-nav">
+            <% if logged_in? %>
+              <li><%= link_to '小説一覧', novels_path %></li>
+              <li><%= link_to "マイページ(#{current_user.name})", user_path(current_user) %></li>
+              <li><%= link_to 'ランキング', rankings_favorite_novels_path %></li>
+              <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'ログイン', login_path %></li>
+              <li><%= link_to 'ユーザー登録', signup_path %></li>
+            <% end %>
+          </ul>
+        
       </div>
     </div>
   </nav>

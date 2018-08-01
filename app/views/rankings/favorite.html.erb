@@ -1,0 +1,25 @@
+<h1>お気に入りランキング</h1>
+<% if @novels.present? %>
+  <div class="novel-list">
+    <% @novels.each_with_index do |novel, index| %>
+        <ul class="media">
+            
+                <div class="media-left">
+                    <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
+                </div>
+                <div class="media-body">
+                    <div>
+                        <span>作者:</span><%= link_to novel.user.name, "/users/#{novel.id}" %><br>
+                        <span class="text-muted">投稿日 <%= novel.created_at %></span><br>
+                        <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
+                        <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
+                    </div>
+                </div><br>
+                <div class="novel-list-footer">
+                    <p>お気に入りをした人数<%= index+1 %>位: <%= @ranking_counts[novel.id] %> 人</p>
+                </div>
+            
+        </ul>
+    <% end %>
+  </div>
+<% end %>

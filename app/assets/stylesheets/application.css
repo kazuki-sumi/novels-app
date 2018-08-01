@@ -1,4 +1,13 @@
+.header a {
+    color:black;
+    text-decoration:none;
+}
 
-.container{
-    width:980px;
+/* 新規小説投稿 */
+
+/* 小説本文 */
+
+.novel-text{
+    width:800px;
+    margin:auto;
 }
