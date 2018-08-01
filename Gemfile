@@ -39,6 +39,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry-byebug', group: :development
 gem 'carrierwave'
 gem 'mini_magick'
+
 group :production do
   gem 'pg', '0.21.0'
 end

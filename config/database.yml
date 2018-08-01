@@ -13,7 +13,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  datebase: novel_production
+  datebase: novels_production
   username: novels
   password: <%= ENV['NOVELS_DATABASE_PASSWORD'] %>
   
