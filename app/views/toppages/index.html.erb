@@ -12,7 +12,11 @@
                 <% @novels.each do |novel| %>
                     <li class="media">
                         <div class="media-left">
-                            <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
+                            <% if novel.user.image? %>
+                                <%= image_tag novel.user.image.url, class: 'image-size' %>
+                            <% else %>
+                                <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
+                            <% end %>
                         </div>
                         <div class="media-body">
                             <span>作者:</span><%= link_to novel.user.name, "/users/#{novel.user_id}" %><br>

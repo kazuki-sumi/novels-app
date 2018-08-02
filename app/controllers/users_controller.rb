@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show, :destroy, :update]
-  before_action :correct_user, only: [:destroy, :update]
+  before_action :correct_user, only: [:destroy]
   
   def show
     @user = User.find(params[:id])
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
-      render :edit
+      redirect_back 
     end
   end
   

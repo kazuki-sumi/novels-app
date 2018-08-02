@@ -10,14 +10,13 @@
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2
+  encoding: utf8
   pool: 5
-  datebase: novels_production
-  username: novels
-  password: <%= ENV['NOVELS_DATABASE_PASSWORD'] %>
+  username: root
+  password:
+  host: localhost
   
-
 development:
   <<: *default
   database: novels_development
@@ -49,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: novels_production
   username: novels
   password: <%= ENV['NOVELS_DATABASE_PASSWORD'] %>

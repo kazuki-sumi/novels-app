@@ -2,7 +2,10 @@
     color:black;
     text-decoration:none;
 }
-
+.image-size{
+    height:80px;
+    width:80px;
+}
 /* 新規小説投稿 */
 
 /* 小説本文 */
