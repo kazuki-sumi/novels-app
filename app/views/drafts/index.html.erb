@@ -1,0 +1,15 @@
+<div class="writting-novels">
+  <div class="contents-box">
+    <h4>執筆中小説一覧</h4>
+    <% @novels.each do |novel| %>
+      <div class="contents">
+        <h2><strong><%=  link_to "#{novel.title}", "/draft/#{novel.id}" %></strong></h2>
+        <div class="button">
+          <%= link_to '本文作成', "/draft/#{novel.id}/new", class: 'txt-btn' %>
+          <%= link_to '編集', "/novels/#{novel.id}/edit", class: 'edit-btn' %>
+          <%= link_to '削除', "/novels/#{novel.id}", method: :delete, data: {confirm: '小説そのものが削除されますがよろしいですか？'}, class: 'delete-btn' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

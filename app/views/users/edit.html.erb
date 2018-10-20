@@ -1,0 +1,31 @@
+<div class="edit-form">
+  <div class="row">
+    <p>ユーザー情報変更</p>
+    <div class="form-group">
+      <%= form_for @user,:url => {:action => 'update'}, :html => {:multipart => true} do |f|  %>
+        <div class="form image">
+          <li class="icon">
+            <% if @user.image? %>
+              <%= image_tag @user.image.url, class: 'image-size' %>
+            <% else %>
+              <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
+            <% end %>
+          </li>
+          <%= f.label '画像を変更する' %>
+          <%= f.file_field :image %>
+        </div>
+        <div class="form username">
+          <%= f.label :name, 'ユーザー名' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form email">
+          <%= f.label :email, 'メールアドレス' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class="text-center">
+          <%= f.submit 'ユーザー情報を変更する', class: 'entry-btn' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

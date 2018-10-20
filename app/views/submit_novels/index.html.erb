@@ -1,0 +1,14 @@
+<div class="submit-novels">
+  <div class="contents-box">
+    <h4>投稿した小説</h4>
+    <% @submit.each do |submit| %>
+      <div class="contents">
+        <h2><strong><%= link_to "#{submit.title}", "/submit_novel/#{submit.novel_id}" %></strong></h2>
+        <div class="button">
+          <%= link_to '編集', "/novels/#{submit.novel_id}/edit", class: 'edit-btn' %>
+          <%= link_to '削除', "/novels/#{submit.novel_id}", class: 'delete-btn' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

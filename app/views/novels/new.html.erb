@@ -1,17 +1,8 @@
-<h3>新規小説投稿</h3>
-<div class="novel-post">
-    <%= form_for(@novel) do |f| %>
-        <div class="form-group">
-            <div class="novel-post-title">
-                <%= f.label :title, '小説タイトル' %>
-                <%= f.text_field :title, :maxlength => 100 %> <span>~100文字まで</span>
-            </div>
-            <div class="novel-post-text">
-                <h4>小説本文</h4>
-                <%= f.text_area :sentence, :maxlength => 1000, :size => '130x15' %>
-                <p>~1000文字まで</p>
-            </div>
-        </div>
-        <%= f.submit '小説を投稿する', class: 'btn btn-primary btn-block' %>
-    <% end %>
+<div class="space2"></div>
+<div class="novel-create form-block">
+  <p>新規小説作成</p>
+  <%= form_for(@novel) do |f| %>
+    <%= render 'novels/novel-form', f: f %>
+    <%= f.submit '新規作成', class: 'blue-btn' %>
+  <% end %>
 </div>

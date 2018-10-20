@@ -1,0 +1,8 @@
+<div class="space2"></div>
+<div class="text-create form-block">
+  <p>小説本文下書き</p>
+  <%= form_for @draft, :url => {:action => 'create'} do |f| %>
+    <%= render 'drafts/draft', f: f %>
+    <%= f.submit '下書き作成', class: 'blue-btn' %>
+  <% end %>
+</div>

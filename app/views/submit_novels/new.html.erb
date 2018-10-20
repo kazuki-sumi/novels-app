@@ -1,0 +1,50 @@
+<div class="space2"></div>
+<div class="text-create form-block">
+  <p>小説投稿</p>
+  <%= form_for @submit, :url => "/submit_novel/#{@draft.novel_id}/#{@draft.sequential_id}" do |f| %>
+    <div class="submit-form-group">
+      <div class="subtitle tag">
+        <h4>サブタイトル ※100文字まで</h4>
+        <div>
+          <%= f.text_field :subtitle, :maxlength => 100, class: 'subtitle-field field', id: 'ttl-field', value: @draft.subtitle  %>
+          <p class="count">現在0文字</p>
+        </div>
+      </div>
+      <div class="preface tag">
+        <h4>前書き※1000文字まで</h4>
+        <div>
+          <%= f.text_area :preface, :maxlength => 1000, class: 'preface-area area txt-field-1', id: 'txt-field-1', value: @draft.preface %><br>
+          <p class="count_num_1">現在0文字</p>
+        </div>
+      </div>
+      <div class="text tag">
+        <h4>小説本文 ※10000文字まで</h4>
+        <div class="arrange">
+          <div class="jquery-button">
+            <button type="button" class="bold">太字</button>
+          </div>
+          <div class="jquery-button">
+            <button type="button" class="small-script">小字</button>
+          </div>
+          <div class="jquery-button">
+            <button type="button" class="big-script">大文字</button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <p id="example">例： ＜strong＞<strong>文字が太くなる</strong>＜/strong＞</p>
+        <div>
+          <%= f.text_area :text, :maxlength => 10000,  class: "text-area area txt-field-2", id: 'txt-field-2', value: @draft.text %>
+          <p class="count_num_2">現在0文字</p>
+        </div>
+      </div>
+      <div class="postscript tag">
+        <h4>後書き ※1000文字まで</h4>
+        <div>
+          <%= f.text_area :postscript, :maxlength => 1000, class: "postscript-area area txt-field-3", id: 'txt-field-3', value: @draft.postscript %>
+          <p class="count_num_3">現在0文字</p>
+        </div>
+      </div>
+    </div>
+    <%= f.submit '投稿する', class: 'blue-btn' %>
+  <% end %>
+</div>

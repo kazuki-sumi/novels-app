@@ -1,0 +1,36 @@
+<div class ="search-form text-center">
+  <h3>タイトル検索</h3>
+  <%= form_tag(search_path, method: :get) do %>
+    <span class="glyphicon glyphicon-search"></span><%= text_field_tag :q %>
+    <%= submit_tag "検索する" %>
+  <% end %>
+</div><br>
+
+<div class="main">
+  <ul class="entry">
+    <strong>投稿結果.</strong>
+  </ul>
+  <% @submit.each do |submit| %>
+    <% @novels.each do |novel| %>
+      <% if novel.id == submit.novel_id %>
+        <div class="novel-box">
+          <div class="trigger">
+            <h3><strong><%= link_to novel.title, "/novel/#{novel.id}" %></strong></h3>
+            <br>
+            <p>作者：<%= link_to novel.user.name, "/users/#{novel.user_id}" %></p>
+            <p class="triangle">▼</p>
+            <p>連載：<%= novel.submit_novels.count %>話</p>
+          </div>
+          <div class="toggle-container">
+            <p><%= simple_format(novel.summary) %></p>
+            <p class="novel-link">
+              <%= link_to "この作品を読む", "/novel/#{novel.id}" %>
+            </p>
+            <p class="day">更新日時<%= simple_time(submit.created_at) %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= paginate @novels %>
+</div>

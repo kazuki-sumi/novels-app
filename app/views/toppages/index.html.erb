@@ -1,34 +1,39 @@
 <div class="cover">
-    <div class="cover-inner">
-        <div class="cover-contents text-center">
-            <h1>さあ、小説を読もう！</h1>
-            <% if logged_in? %>
-                <%= link_to '小説を読む', novels_path, class: 'btn btn-success btn-lg' %>
-            <% else %>
-                <%= link_to '小説を読む', signup_path, class: 'btn btn-success btn-lg' %>
-            <% end %>
-        </div><br>
-            <ul class="novel-list">
-                <% @novels.each do |novel| %>
-                    <li class="media">
-                        <div class="media-left">
-                            <% if novel.user.image? %>
-                                <%= image_tag novel.user.image.url, class: 'image-size' %>
-                            <% else %>
-                                <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
-                            <% end %>
-                        </div>
-                        <div class="media-body">
-                            <span>作者:</span><%= link_to novel.user.name, "/users/#{novel.user_id}" %><br>
-                            <span class="text-muted">投稿日 <%= novel.created_at %></span><br>
-                            <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
-                            <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
-                        </div><br>
-                        <% if logged_in? %>
-                            <%= render 'favorites/favorite_button', novel: novel %>
-                        <% end %>
-                    </li>
-                <% end %>
-            </ul>
+  <div class="cover-inner">
+    <div class="cover-contents text-center">
+      <h1>さあ、小説を読もう！</h1>
+      <%  unless logged_in? %>
+        <%= link_to '小説を読む', signup_path, class: 'top-btn' %>
+      <% end %>
+    </div><br>
+    <div class="space1"></div>
+    <div class="main">
+      <ul class="entry">
+        <strong>新着投稿作品</strong>
+      </ul>
+      <% @submit.each do |submit| %>
+        <% @novels.each do |novel| %>
+          <% if novel.id == submit.novel_id %>
+            <div class="novel-box">
+              <div class="trigger">
+                <h3><strong><%= link_to novel.title, "/novel/#{novel.id}" %></strong></h3>
+                <br>
+                <p>作者：<%= link_to novel.user.name, "/users/#{novel.user_id}" %></p>
+                <p class="triangle">▼</p>
+                <p>連載：<%= novel.submit_novels.count %>話</p>
+              </div>
+              <div class="toggle-container">
+                <p><%= simple_format(novel.summary) %></p>
+                <p class="novel-link">
+                  <%= link_to "この作品を読む", "/novel/#{novel.id}" %>
+                </p>
+                <p class="day">更新日時<%= simple_time(submit.created_at) %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= paginate @novels %>
     </div>
+  </div>
 </div>

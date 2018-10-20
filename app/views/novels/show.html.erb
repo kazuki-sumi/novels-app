@@ -1,9 +1,35 @@
-<div class="novel-text">
-    <div class="novel-text-title">
-        <span>タイトル：</span><%= @novel.title %>
+<div class="novelnavi">
+  <li class="beforepage">
+    <% unless @submit.sequential_id-1 == 0 %>
+      <%= link_to "<<前のページ", "/novel/#{@novel.id}/#{@submit.sequential_id-1}" %>
+    <% end %>
+  </li>
+  <li class="mokuzi"><%= link_to "目次", "/novel/#{@novel.id}" %></li>
+  <li class="nextpage">
+    <% if @submit.sequential_id < @novel.submit_novels.count %>
+      <%= link_to "次のページ>>", "/novel/#{@novel.id}/#{@submit.sequential_id+1}" %>
+    <% end %>
+  </li>
+</div>
+<h1 id="pagetitle"><%= @novel.title %></h1>
+<div id="novel-contents">
+  <p class="author">作者：<%= @novel.user.name %></p><br><br>
+  <div id="entry-box">
+    <div class="preface">
+      <%= simple_format(@submit.submit_novel.preface) %>
     </div>
-    <div class="novel-text-body">
-        <h4>本文</h4>
-        <%= @novel.sentence %>
+    <br>
+    <hr>
+    <h2 class="subtitle"><%= @submit.submit_novel.subtitle %></h2>
+    <br>
+    <div class="text">
+      <%= simple_format(@submit.submit_novel.text) %>
     </div>
+    <br>
+    <hr>
+    <br>
+    <div class="postscript">
+      <%= simple_format(@submit.submit_novel.postscript) %>
+    </div>
+  </div>
 </div>

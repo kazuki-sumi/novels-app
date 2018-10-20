@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
     # ControllerからHelperのメソッドを使用するための処理
     include SessionsHelper
     
+    def counts(user)
+      @count_followings = user.followings.count
+      @count_followers = user.followers.count
+    end
+    
     private
     
     # ログイン認証を確認するための処理

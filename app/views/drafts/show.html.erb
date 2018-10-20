@@ -1,0 +1,21 @@
+<div class="writting-story">
+  <div class="contents-box">
+    <h4>執筆中の小説本文</h4>
+    <% if @novel %>
+      <% @drafts.each do |draft| %>
+        <% unless draft.submit_novel %>
+          <div class="contents">
+            <h2><%= draft.subtitle %></h2><br>
+            <div class="button">
+              <%= link_to '投稿', "/submit_novel/#{draft.novel_id}/#{draft.sequential_id}/new", class: 'txt-btn' %>
+              <%= link_to '編集', "/draft/#{draft.novel_id}/#{draft.sequential_id}/edit", class: 'edit-btn' %>
+              <%= link_to '削除', "/draft/#{draft.novel_id}/#{draft.sequential_id}", method: :delete, data: {confirm: 'この話を削除しますか？'}, class: 'delete-btn' %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>まだ本文は作成されていません。</p>
+    <% end %>
+  </div>
+</div>

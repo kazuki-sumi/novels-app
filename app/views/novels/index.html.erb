@@ -1,29 +1,35 @@
-<div class ="search-form text-center">
-    <h3>タイトル検索</h3>
-    <%= form_tag(novels_path, method: :get) do %>
-        <span class="glyphicon glyphicon-search"></span><%= text_field_tag :q %>
-        <%= submit_tag "検索する" %>
-    <% end %>
-</div><br>
-<div class="novel-list">
-    <% @novels.each do |novel| %>
-        <ul class="media">
-            <div class="media-left">
-                <% if novel.user.image? %>
-                    <%= image_tag novel.user.image.url, class: 'image-size' %>
-                <% else %>
-                    <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
-                <% end %>
-            </div>
-            <div class="media-body">
-                <span>作者:</span><%= link_to novel.user.name, "/users/#{novel.user_id}" %><br>
-                <span class="text-muted">投稿日 <%= novel.created_at %></span><br>
-                <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
-                <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
-            </div><br>
-            <% unless current_user.id == novel.user_id %>
-                <%= render 'favorites/favorite_button', novel: novel %>
-            <% end %>
-        </ul>
-    <% end %>
+<h1 id="pagetitle"><%= @novel.title %></h1>
+<div id="novel-contents">
+  <p class="author">
+    作者：<%= @novel.user.name %>
+  </p>
+  <% unless current_user.id == @novel.user_id %>
+    <div id="favorite-btn">
+      <%= render 'favorites/favorite_button', novel: @novel %>
+    </div>
+  <% end %>
+  <div class="clearfix"></div>
+  <hr class ="border">
+  <div id="entry-box">
+    <p><strong>あらすじ</strong></p>
+    <%= simple_format(@novel.summary) %>
+  </div>
+  <br>
+  <hr class="border">
+  <div class="entry">
+  <% @submit.each do |submit| %>
+    <li>
+      <%= link_to submit.subtitle, "/novel/#{@novel.id}/#{submit.sequential_id}", class: 'subtitle' %>
+      <p class="date">
+        <% if submit.created_at == submit.updated_at %>
+          <%= simple_time(submit[:created_at]) %>
+        <% else %>
+          <%= simple_time(submit[:created_at]) %>(改:<%= simple_time(submit[:updated_at]) %>)
+        <% end %>
+      </p>
+    </li>
+    <hr class="border">
+  <% end %>
+  </div>
+  <br>
 </div>

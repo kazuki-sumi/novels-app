@@ -1,0 +1,16 @@
+<div class="novel-form-group">
+  <div class="title tag">
+    <h4>小説タイトル※100文字まで</h4>
+    <div>
+      <%= f.text_field :title, :maxlength => 100, class: 'title-field', id: 'ttl-field' %><br>
+      <p class="count">現在0文字</p>
+    </div>
+  </div>
+  <div class="summary tag">
+    <h4>あらすじ　※1000文字まで</h4>
+    <div>
+      <%= f.text_area :summary, :maxlength => 1000, class: "summary-area txt-field-1", id: 'txt-field-4' %>
+      <p class="count_num_1">現在0文字</p>
+    </div>
+  </div>
+</div>

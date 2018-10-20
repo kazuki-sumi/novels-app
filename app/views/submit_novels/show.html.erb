@@ -1,0 +1,23 @@
+<h1 id="pagetitle"><%= @novel.title %></h1>
+<div id="novel-contents">
+  <div id="entry-box">
+    <p><strong>あらすじ</strong></p>
+    <%= simple_format(@novel.summary) %>
+  </div>
+  <br>
+  <hr class="border">
+  <div class="entry">
+  <% @submit.each do |submit| %>
+    <li>
+      <p><%= submit.subtitle %></p>
+      <div class="button">
+        <%= link_to '編集', "/submit_novel/#{submit.id}/edit", class: 'edit-btn' %>
+        <%= link_to '削除', "/submit_novel/#{submit.id}",  method: :delete, class: 'delete-btn' %>
+      </div>
+    </li>
+    <hr class="border">
+  <% end %>
+  </div>
+  <br>
+</div>
+

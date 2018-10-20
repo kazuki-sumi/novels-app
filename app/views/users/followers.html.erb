@@ -1,0 +1,17 @@
+<div class="followers">
+  <div class="contents-box">
+    <h4>フォロワー(<%= @count_followers %>人)</h4>
+    <% @followers.each do |follower| %>
+      <div class="contents">
+        <span class="icon">
+          <% if follower.image? %>
+            <%= image_tag follower.image.url, class: 'image-size' %>
+          <% else %>
+            <img src="<%= gravatar_url(follower, size: 60) %>" alt="" class="img-circle">
+          <% end %>
+        </span>
+        <h2><strong><%= link_to follower.name, "/users/#{follower.id}" %></strong></h2>
+      </div>
+    <% end %>
+  </div>
+</div>

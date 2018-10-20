@@ -1,0 +1,81 @@
+@media(max-width: 480px){
+  .row{
+    width:80%;
+  }
+  .mypage-left{
+    width: 80%;
+    margin: 0 auto;
+    float: none;
+  }
+  .mypage-center{
+    float: none;
+    width: 100%;
+    margin-top: 30px;
+  }
+  .submit-novels, .writting-novels, .writting-story{
+    width: 100%;
+  }
+  #novel-contents{
+    width:100%;
+  }
+   .entry-box, .entry li .subtitle{
+  margin-left: 2px;
+}
+#novel-contents .entry li p{
+  float: none;
+  margin-left: 2px;
+}
+.border{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.following-btn{
+  width: 50%;
+}
+.followers{
+  width: 90%;
+}
+}
+
+
+
+@media(min-width: 481px){
+  .row{
+    width:80%;
+  }
+}
+
+
+
+@media(min-width: 700px){
+  #page{
+    width:650px;
+    margin:0 auto;
+  }
+  .row{
+    width: 60%;
+  }
+}
+
+
+
+@media(min-width: 1000px){
+  #container{
+    width:980px;
+    margin:0 auto;
+    border-left:1px #c0c0c0 solid;
+    border-right:1px #c0c0c0 solid;
+  }
+  #page{
+    width:950px;
+    margin:0 auto;
+  }
+  .row{
+    width: 40%;
+  }
+  #novel-contents .entry li{
+   width: 95%;
+   margin: 0 auto;
+  }
+}
+

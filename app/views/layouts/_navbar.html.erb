@@ -1,30 +1,55 @@
-<header>
-  <nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-          <ul class="nav navbar-nav">
-            <% if logged_in? %>
-              <li><%= link_to '小説一覧', novels_path %></li>
-              <li><%= link_to "マイページ(#{current_user.name})", user_path(current_user) %></li>
-              <li><%= link_to 'ランキング', rankings_favorite_novels_path %></li>
-              <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-            <% else %>
-              <li><%= link_to 'ログイン', login_path %></li>
-              <li><%= link_to 'ユーザー登録', signup_path %></li>
-            <% end %>
-          </ul>
-        
-      </div>
-    </div>
-  </nav>
-</header>
+<div id="navbar">
+  <ul class="nl">
+    <% if logged_in? %>
+      <li>
+        <%= link_to(search_path) do %>
+          <span class="glyphicon glyphicon-book nav-icon"></span><br>
+          小説検索
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(user_path(current_user)) do %>
+          <span class="glyphicon glyphicon-user nav-icon"></span><br>
+          <%= "マイページ" %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(rankings_favorite_novels_path) do %>
+        <span class="glyphicon glyphicon-align-justify nav-icon"></span><br>
+        ランキング
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(logout_path, method: :delete) do %>
+          <span class="glyphicon glyphicon-remove nav-icon"></span><br>
+          ログアウト
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to(search_path) do %>
+          <span class="glyphicon glyphicon-book nav-icon"></span><br>
+          小説検索
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(rankings_favorite_novels_path) do %>
+          <span class="glyphicon glyphicon-align-justify nav-icon"></span><br>
+          ランキング
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(login_path) do %>
+          <span class="glyphicon glyphicon-ok nav-icon"></span><br>
+          ログイン
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(signup_path) do %>
+          <span class="glyphicon glyphicon-send nav-icon"></span><br>
+          ユーザー登録
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

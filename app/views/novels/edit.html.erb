@@ -1,17 +1,8 @@
-<h3>小説を編集する</h3>
-<div class="novel-edit">
-    <%= form_for(@novel) do |f| %>
-        <div class="form-group">
-            <div class="novel-edit-title">
-                <%= f.label :title, '小説タイトル' %>
-                <%= f.text_field :title, :maxlength => 100 %> <span>~100文字まで</span>
-            </div>
-            <div class="novel-edit-text">
-                <h4>小説本文</h4>
-                <%= f.text_area :sentence, :maxlength => 1000, :size => '130x15' %>
-                <p>~1000文字まで</p>
-            </div>
-        </div>
-        <%= f.submit '小説を編集する', class: 'btn btn-primary btn-block' %>
-    <% end %>
+<div class="space2"></div>
+<div class="novel-edit form-block">
+  <p>小説編集</p>
+  <%= form_for(@novel) do |f| %>
+    <%= render 'novels/novel-form', f: f %>
+    <%= f.submit '保存する', class: 'green-btn' %>
+  <% end %>
 </div>

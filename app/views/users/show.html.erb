@@ -1,81 +1,48 @@
-<h1><%= @user.name %>のページ</h1>
-<div class="user-personal">
-    <aside class="col-md-4">
-        <div class="icon">
-            <% if @user.image? %>
-                <%= image_tag @user.image.url, class: 'image-size' %>
-            <% else %>
-                <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
-            <% end %>
-        </div>
-        <div class="name">
-            <h1><%= @user.name %></h1>
-        </div>
-        <% if current_user.id == @user.id %>
-            <div class="novel-menu">
-                <h4>メニュー</h4>
-                <%= link_to '小説を投稿する', new_novel_path, class: 'label label-default' %><br> 
-                <%= link_to 'ユーザ登録を削除する', user_path, method: :delete, class: 'label label-warning' %><br>
-                <%= form_for @user,:url => {:action => 'update'}, :html => {:multipart => true} do |f|  %>
-                    <%= f.label '画像を変更する' %>
-                    <%= f.file_field :image %><br>
-                    <%= f.submit '画像を変える', class: 'btn btn-success' %>
-                <% end %>
-            </div>
+<div class="mypage">  
+  <div class="mypage-sub mypage-left">
+    <ul class="submenu">
+      <li class="icon">
+        <% if @user.image? %>
+          <%= image_tag @user.image.url, class: 'image-size' %>
+        <% else %>
+          <img src="<%= gravatar_url(@user, size: 100) %>" alt="" class="img-circle">
         <% end %>
-    </aside>
-    <div class="user-center col-xs-8">
-        <div class="favorite-novels">
-            <h3>お気に入り小説一覧</h3>
-            <% @user.favorite_novels.each do |favorite_novel| %>
-                <ul class="media">
-                        <div class="media-left">
-                            <% if favorite_novel.user.image? %>
-                                <%= image_tag favorite_novel.user.image.url, class: 'image-size' %>
-                            <% else %>
-                                <img class="media-object img-rounded" src="<%= gravatar_url(favorite_novel.user, {size: 70}) %>" alt="">
-                            <% end %>
-                        </div>
-                        <div class="media-body">
-                            <span>作者:</span><%= link_to favorite_novel.user.name, "/users/#{favorite_novel.user_id}" %><br>
-                            <span class="text-muted">投稿日 <%= favorite_novel.created_at %></span><br>
-                            <span class="text-muted">更新日 <%= favorite_novel.updated_at %></span><br>
-                            <span>タイトル:</span><%= link_to favorite_novel.title, "/novels/#{favorite_novel.id}" %>
-                        </div>
-                </ul>
-            <% end %>
+        <h1><%= @user.name %></h1>
+        <%= render 'relationships/follow_button', user: @user %>
+      </li>
+     
+      <% if current_user.id == @user.id %>
+        <li><%= link_to '小説を作成する', new_novel_path %></li>
+        <li><%= link_to 'ユーザー登録を削除する', "/users/#{@user.id}", method: :delete %></li>
+        <li><%= link_to '執筆中の小説', '/draft_list' %></li> 
+        <li><%= link_to '投稿した小説', "/submit_novels/#{@user.id}" %></li>
+        <li><%= link_to 'フォロー中のユーザー', "/users/#{@user.id}/followings" %></li>
+        <li><%= link_to 'フォロワー', "/users/#{@user.id}/followers" %></li>
+        <li><%= link_to 'ユーザー情報を変更する', "/users/#{@user.id}/edit" %></li>
+      <% end %>
+      
+    </ul>
+  </div>
+  
+  <div class="mypage-main mypage-center">
+    <div class="contents-box">
+      <h4>作品</h4>
+      <% @novels.each do |novel| %>
+        <div class="contents">
+          <h2><strong><%= link_to novel.title, "/novel/#{novel.id}" %></strong></h2>
+          <p>連載：<%= novel.submit_novels.count %>話</p>
+          <p class="date">更新日時<%= simple_time(novel.submit_novels.last.updated_at) %></p>
         </div>
-        <div class="posted-novels">
-            <h3>投稿した小説一覧</h3>
-            <div class="novels-list">
-                <% @novels.each do |novel| %>
-                    <ul class="media">
-                        <div class="media-left">
-                            <% if novel.user.image? %>
-                                <%= image_tag novel.user.image.url, class:'image-size' %>
-                            <% else %>
-                                <img class="media-object img-rounded" src="<%= gravatar_url(novel.user, {size: 70}) %>" alt="">
-                            <% end %>
-                        </div>
-                        
-                        <div class="media-body">
-                            <div>
-                                <span>作者：</span><%= link_to novel.user.name, user_path %><br>
-                                <span class="text-muted">投稿日</span> <%= novel.created_at %><br>
-                                <span class="text-muted">更新日 <%= novel.updated_at %></span><br>
-                                <span>タイトル:</span><%= link_to novel.title, "/novels/#{novel.id}" %>
-                            </div><br>
-                            <% if current_user.id == novel.user_id %>
-                                <%= link_to 'この小説を編集する', "/novels/#{novel.id}/edit", class: 'btn btn-default' %>
-                                <%= link_to 'この小説を削除する', "/novels/#{novel.id}", method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: 'btn btn-danger' %>
-                            <% end %>
-                            <% unless current_user.id == novel.user_id %>
-                                <%= render 'favorites/favorite_button', novel: novel %>
-                            <% end %>
-                        </div>
-                    </ul>
-                <% end %>
-            </div>
-        </div>
+      <% end %>
     </div>
+    <div class="contents-box favorite-novels">
+      <h4>お気に入り小説リスト</h4>
+      <% @user.favorite_novels.each do |favorite| %>
+        <div class="contents">
+          <h2><strong><%= link_to favorite.title, "/novel/#{favorite.id}" %></strong></h2>
+          <span>作者:</span><%= link_to favorite.user.name, "/users/#{favorite.user_id}" %><br>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

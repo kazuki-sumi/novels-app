@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :destroy, :update]
-  before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: [:show, :destroy, :update, :followings, :followers]
+  before_action :correct_user, only: [:destroy, :edit]
   
   def show
     @user = User.find(params[:id])
-    @novels = @user.novels.order('created_at DESC').page(params[:page])
+    @novels = Novel.where(user_id: params[:id]).joins(:drafts => :submit_novel).distinct
   end
 
   def new
@@ -29,6 +29,10 @@ class UsersController < ApplicationController
     redirect_to '/'
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -37,11 +41,23 @@ class UsersController < ApplicationController
       redirect_back 
     end
   end
+ 
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings
+    counts(@user)
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers
+    counts(@user)
+  end
   
   private
   
   def correct_user
-      unless current_user == self
+      unless current_user
         redirect_to root_url
       end
   end

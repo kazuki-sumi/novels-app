@@ -1,0 +1,8 @@
+<div class="space2"></div>
+<div class="text-edit form-block">
+  <p>本文下書き編集</p>
+  <%= form_for @draft, :url => {:action => 'update'} do |f| %>
+    <%= render 'drafts/draft', f: f %>
+    <%= f.submit '途中保存', class: 'green-btn' %>
+  <% end %>
+</div>

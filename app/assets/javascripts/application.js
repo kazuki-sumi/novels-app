@@ -12,5 +12,106 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+//= require_self
+
+/* global $ */
+
+// トリガー部分
+$(function(){
+  $(".trigger").click(function(){
+    $(this).next().toggle();
+  });
+});
+
+// 文字カウント
+$(function(){
+  $('.txt-field-1').on('keydown keyup keypress change', function(){
+    var str = $(this).val();
+    str = str.replace(/\n/g, '');
+    var strCount = "現在" + str.length + "文字";
+    $(".count_num_1").html(strCount);
+  });
+})
+
+$(function(){
+  $('.txt-field-2').on('keydown keyup keypress change', function(){
+    var str = $(this).val();
+    str = str.replace(/\n/g, '');
+    var strCount = "現在" + str.length + "文字";
+    $(".count_num_2").html(strCount);
+  });
+});
+
+$(function(){
+  $('.txt-field-3').on('keydown keyup keypress change', function(){
+    var str = $(this).val();
+    str = str.replace(/\n/g, '');
+    var strCount = "現在" + str.length + "文字";
+    $(".count_num_3").html(strCount);
+  });
+});
+
+$(function(){
+  $("#ttl-field").on("keydown keyup keypress change", function(){
+    var str = $(this).val();
+    str = str.replace(/\n/g, '');
+    var strCount = "現在" + str.length + "文字";
+    $(".count").html(strCount);
+  });
+});
+
+// フォローボタン
+$(function(){
+  $(".following-btn").hover(function(){
+    $(this).val('解除する');
+  }, function() {
+    $(this).val('フォロー中');
+  });
+});
+
+// 機能ボタン
+ //太字
+$(function(){
+  var field = document.getElementById('txt-field-2');
+  var tag = new Array('<strong>', '</strong>');
+   $(".bold").click(function(){
+   var start = field.selectionStart;
+   var end = field.selectionEnd;
+   var selected = end - start;
+   var target = selected ? field.value.substr(start, selected) : '';
+   field.value = field.value.substr(0, start) + tag[0] + target + tag[1] +field.value.substr(end, field.value.length);
+   field.focus();
+   field.setSelectionRange(start, (start + tag[0].length + selected + tag[1].length));
+  });
+});
+ //小文字
+$(function(){
+  var field = document.getElementById('txt-field-2');
+  var tag = new Array('<small>', '</small>');
+   $(".small-script").click(function(){
+   var start = field.selectionStart;
+   var end = field.selectionEnd;
+   var selected = end - start;
+   var target = selected ? field.value.substr(start, selected) : '';
+   field.value = field.value.substr(0, start) + tag[0] + target + tag[1] +field.value.substr(end, field.value.length);
+   field.focus();
+   field.setSelectionRange(start, (start + tag[0].length + selected + tag[1].length));
+  });
+});
+ //大文字
+$(function(){
+  var field = document.getElementById('txt-field-2');
+  var tag = new Array('<big>', '</big>');
+   $(".big-script").click(function(){
+   var start = field.selectionStart;
+   var end = field.selectionEnd;
+   var selected = end - start;
+   var target = selected ? field.value.substr(start, selected) : '';
+   field.value = field.value.substr(0, start) + tag[0] + target + tag[1] +field.value.substr(end, field.value.length);
+   field.focus();
+   field.setSelectionRange(start, (start + tag[0].length + selected + tag[1].length));
+  });
+});
+
+
