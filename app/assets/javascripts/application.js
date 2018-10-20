@@ -32,7 +32,7 @@ $(function(){
     var strCount = "現在" + str.length + "文字";
     $(".count_num_1").html(strCount);
   });
-})
+});
 
 $(function(){
   $('.txt-field-2').on('keydown keyup keypress change', function(){

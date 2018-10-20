@@ -12,7 +12,7 @@
       <p><%= submit.subtitle %></p>
       <div class="button">
         <%= link_to '編集', "/submit_novel/#{submit.id}/edit", class: 'edit-btn' %>
-        <%= link_to '削除', "/submit_novel/#{submit.id}",  method: :delete, class: 'delete-btn' %>
+        <%= link_to '削除', "/submit_novel/#{submit.id}",  method: :delete, data: {confirm: '投稿した本文を削除しますか？'}, class: 'delete-btn' %>
       </div>
     </li>
     <hr class="border">

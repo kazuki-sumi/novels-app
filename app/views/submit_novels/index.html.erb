@@ -6,7 +6,7 @@
         <h2><strong><%= link_to "#{submit.title}", "/submit_novel/#{submit.novel_id}" %></strong></h2>
         <div class="button">
           <%= link_to '編集', "/novels/#{submit.novel_id}/edit", class: 'edit-btn' %>
-          <%= link_to '削除', "/novels/#{submit.novel_id}", class: 'delete-btn' %>
+          <%= link_to '削除', "/novels/#{submit.novel_id}", data: {confirm: '投稿を削除しますか？'}, class: 'delete-btn' %>
         </div>
       </div>
     <% end %>

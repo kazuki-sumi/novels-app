@@ -13,7 +13,7 @@
      
       <% if current_user.id == @user.id %>
         <li><%= link_to '小説を作成する', new_novel_path %></li>
-        <li><%= link_to 'ユーザー登録を削除する', "/users/#{@user.id}", method: :delete %></li>
+        <li><%= link_to 'ユーザー登録を削除する', "/users/#{@user.id}", method: :delete, data: {confirm: 'ユーザー情報を削除しますか？'} %></li>
         <li><%= link_to '執筆中の小説', '/draft_list' %></li> 
         <li><%= link_to '投稿した小説', "/submit_novels/#{@user.id}" %></li>
         <li><%= link_to 'フォロー中のユーザー', "/users/#{@user.id}/followings" %></li>
