@@ -16,6 +16,9 @@
 //= require_self
 
 /* global $ */
+//HTMLの読み込みが完了してからjQueryによる操作を開始するためreadyイベントを使用。
+//$(document).ready()。省略形は$(function(){この中にjQuery});
+
 
 // トリガー部分
 $(function(){
@@ -74,7 +77,7 @@ $(function(){
  //太字
 $(function(){
   var field = document.getElementById('txt-field-2');
-  var tag = new Array('<strong>', '</strong>');
+  var tag = new Array('<b>', '</b>');
    $(".bold").click(function(){
    var start = field.selectionStart;
    var end = field.selectionEnd;
@@ -114,4 +117,24 @@ $(function(){
   });
 });
 
+ //トップページへ戻るボタン
+function updateButton(){
+    if ($(this).scrollTop() >= 800){
+        $("#back-to-top").fadeIn();
+    } else {
+        $("#back-to-top").fadeOut();
+    }
+}
 
+$(document).ready(function(){
+    $(window).scroll(updateButton);
+    $("#back-to-top").click(function(){
+        $("html, body").animate(
+            {
+                scrollTop: 0
+            },
+            600
+            );
+            return false;
+    });
+});

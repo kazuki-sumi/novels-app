@@ -379,6 +379,21 @@ p.date{
   float:right;
   margin-right: 30px;
 }
+#back-to-top {
+  color:rgba(0, 0, 0, 0.2);
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px 5px;
+  transition:all 0.5s;
+  position: fixed;
+  right:40px;
+  bottom:40px;
+  display:none;
+}
+#back-to-top:hover{
+  background:rgba(0, 0, 0, 0.5);
+  color:white;
+}
 
 /* drafts */
 /* 執筆中小説一覧 */
@@ -399,6 +414,7 @@ p.date{
   border: solid 2px;
   padding: 10px 20px;
 }
+
 /* 執筆中の小説本文 */
 .writting-story{
   width: 80%;
