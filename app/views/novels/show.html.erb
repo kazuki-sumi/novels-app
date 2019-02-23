@@ -31,7 +31,7 @@
     <div class="postscript">
       <%= simple_format(@submit.submit_novel.postscript) %>
     </div>
-    <%= social_share_button_tag(@novel.title, :allow_sites => %w(twitter), 'data-twitter-title' => 'Twitter' ) %>
+    <%= social_share_button_tag(@novel.title, :allow_sites => %w(twitter) ) %>
   </div>
   
   <a href="/" id="back-to-top">↑  トップページへ</a>
