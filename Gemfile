@@ -41,6 +41,7 @@ gem 'pry-byebug', group: :development
 gem 'sequenced'
 gem 'hirb'
 gem 'hirb-unicode'
+gem 'social-share-button'
 
 group :production do
   gem 'pg', '0.21.0'

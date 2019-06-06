@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= require_self
+//= require social-share-button
 
 /* global $ */
 //HTMLの読み込みが完了してからjQueryによる操作を開始するためreadyイベントを使用。
