@@ -16,7 +16,7 @@ class User < ApplicationRecord
   
   def fav(novel)
     unless self.id == novel.favorites.find_by(user_id: novel.user_id)
-        self.favorites.find_or_create_by(novel_id: novel.id)
+       self.favorites.find_or_create_by(novel_id: novel.id)
     end
   end
   
