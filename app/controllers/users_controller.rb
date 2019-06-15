@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @novels = Novel.where(user_id: params[:id]).joins(:drafts => :submit_novel).distinct
+    @novels = Novel.posted_novels(params[:id])
   end
 
   def new
@@ -56,10 +56,15 @@ class UsersController < ApplicationController
   
   private
   
+  def counts(user)
+    @count_followings = user.followings.count
+    @count_followers = user.followers.count
+  end
+
   def correct_user
-      unless current_user
-        redirect_to root_url
-      end
+    unless current_user
+      redirect_to root_url
+    end
   end
   
   def user_params

@@ -8,4 +8,8 @@ class Novel < ApplicationRecord
   has_many :favorite_user, through: :favorites, source: :user
   has_many :drafts, dependent: :destroy
   has_many :submit_novels, through: :drafts
+  
+  scope :posted_novels, ->(params) do
+    where(user_id: params).joins(:drafts => :submit_novel).distinct
+  end
 end
