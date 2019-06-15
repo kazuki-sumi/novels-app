@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.6'
+gem 'rails'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -42,6 +42,8 @@ gem 'sequenced'
 gem 'hirb'
 gem 'hirb-unicode'
 gem 'social-share-button'
+gem 'slim-rails'
+gem 'dotenv-rails'
 
 group :production do
   gem 'pg', '0.21.0'
@@ -50,6 +52,9 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'capybara'
 end
 
 group :development do
