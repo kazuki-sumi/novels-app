@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:destroy, :edit]
   
   def show
+    binding.pry
     @user = User.find(params[:id])
-    @novels = Novel.where(user_id: params[:id]).joins(:drafts => :submit_novel).distinct
+    @novels = Novel.posted_novels(params[:id])
   end
 
   def new
@@ -57,9 +58,9 @@ class UsersController < ApplicationController
   private
   
   def correct_user
-      unless current_user
-        redirect_to root_url
-      end
+    unless current_user
+      redirect_to root_url
+    end
   end
   
   def user_params
