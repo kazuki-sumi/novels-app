@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:destroy, :edit]
   
   def show
-    binding.pry
     @user = User.find(params[:id])
     @novels = Novel.posted_novels(params[:id])
   end
