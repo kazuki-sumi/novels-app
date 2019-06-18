@@ -44,6 +44,7 @@ gem 'hirb-unicode'
 gem 'social-share-button'
 gem 'slim-rails'
 gem 'dotenv-rails'
+gem "sidekiq"
 
 group :production do
   gem 'pg', '0.21.0'
