@@ -14,5 +14,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "sample_test" do
+    hello = "Hello World"
+    expect(hello).to eq "Hello World"
+  end
 end
