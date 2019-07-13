@@ -16,7 +16,7 @@ default: &default
   username: root
   password: # <%= ENV["DATABASE_PASSWORD"] %>
   host: localhost
-  
+
 development:
   <<: *default
   database: novels_development
