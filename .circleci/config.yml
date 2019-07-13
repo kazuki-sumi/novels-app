@@ -1,8 +1,33 @@
 version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/ruby:2.5.1
+        enviroment:
+          RAILS_ENV: test
+      - image: circleci/mysql5.6
+    working_directory: ~/novels-app
     steps:
       - checkout
-      - run: echo "Hello World"
+
+      - restore_cache:
+        key: rails-demo-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle install --path vendor/bundle
+
+      - save_cache:
+        key: rails-demo-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vender/bundle
+
+      - run:
+        name: Database setup
+        command: |
+          bundle exec rake db:create db:shema:load --trace
+          bundle exec rake db:migrate
+
+      - run:
+        name: run tests
+        command: |
+          mkdir /tmp/test-results
+          bundle exec rspec
