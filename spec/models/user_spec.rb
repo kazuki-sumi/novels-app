@@ -18,4 +18,9 @@ RSpec.describe User, type: :model do
     hello = "Hello World"
     expect(hello).to eq "Hello World"
   end
+
+  it "test" do
+    user = FactoryBot.create(:user1)
+    expect(user.name).to eq "テストユーザー1"
+  end
 end
