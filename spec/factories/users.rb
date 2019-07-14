@@ -12,7 +12,19 @@
 #
 
 FactoryBot.define do
-  factory :user do
-    
+  factory :user1, class: User do
+    id { rand(1..1000) }
+    name { "テストユーザー1" }
+    email { "test001@example.com" }
+    image { nil }
+    password_digest { "password" }
+  end
+
+  factory :user2, class: User do
+    id { rand(1..1000) }
+    name { "テストユーザー2" }
+    email { "test002@example.com" }
+    image { nil }
+    password_digest { "password" }
   end
 end
