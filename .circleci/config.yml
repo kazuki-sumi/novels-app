@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.1
+      - image: circleci/mysql5.6
     steps:
       - checkout
       - run: bundle install
