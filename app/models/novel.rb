@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: novels
+#
+#  id         :integer          not null, primary key
+#  summary    :text(65535)
+#  title      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_novels_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+
 class Novel < ApplicationRecord
   belongs_to :user
   validates :user_id, presence: true
