@@ -8,6 +8,15 @@ jobs:
       - image: circleci/mysql:5.6
     steps:
       - checkout
-      - run: bundle install
+      - restore_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle install --path vendor/bundle
+
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
       - run: bundle exec rails db:create db:migrate RAILS_ENV=test
       - run: bundle exec rspec
