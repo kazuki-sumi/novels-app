@@ -8,6 +8,7 @@ jobs:
       - image: circleci/mysql:5.6
     steps:
       - checkout
+      - run: cp config/database.yml
       - restore_cache:
         keys:
           # - gem-cache-v1-{{linux amd64}}-{{master}}-{{ checksum "Gemfile.lock" }}
