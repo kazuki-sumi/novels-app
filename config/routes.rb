@@ -48,4 +48,10 @@ Rails.application.routes.draw do
 
     #relationships
     resources :relationships, only: [:create, :destroy]
+
+    # api
+    namespace :api do
+      resources :users, only: %i[index show]
+      resources :novels, only: %i[index show]
+    end
 end
