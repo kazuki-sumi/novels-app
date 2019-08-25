@@ -57,6 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara'
   gem 'pry-byebug'
+  gem "simplecov"
 end
 
 group :development do
