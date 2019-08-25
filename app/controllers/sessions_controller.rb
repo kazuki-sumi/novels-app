@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
   def new
-    
   end
 
   def destroy
@@ -20,9 +19,9 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
-  
+
   private
-  
+
   def login(email, password)
     @user = User.find_by(email: email)
     if @user && @user.authenticate(password)
@@ -32,5 +31,4 @@ class SessionsController < ApplicationController
       return false
     end
   end
-  
 end
