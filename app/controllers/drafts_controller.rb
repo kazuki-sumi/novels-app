@@ -1,21 +1,21 @@
 class DraftsController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy, :edit]
-  
+
   #執筆中の小説一覧
   def index
     @novels = current_user.novels
   end
-  
+
   def show
     @drafts = Draft.where(novel_id: params[:novel_id])
     @novel = Draft.find_by(novel_id: params[:novel_id])
   end
-  
+
   def new
     @draft = Draft.new
   end
-  
+
   def create
     @novel = Draft.where(novel_id: params[:novel_id])
     @draft = @novel.new(draft_params)
@@ -27,11 +27,11 @@ class DraftsController < ApplicationController
       render :new
     end
   end
-  
+
   def edit
     @draft = Draft.find_by(novel_id: params[:novel_id], sequential_id: params[:sequential_id])
   end
-  
+
   def update
     @drafts = Draft.find_by(novel_id: params[:novel_id], sequential_id: params[:sequential_id])
     if @drafts.update(draft_params)
@@ -42,7 +42,7 @@ class DraftsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @draft = Draft.find_by(novel_id: params[:novel_id], sequential_id: params[:sequential_id])
     if @draft.destroy
@@ -53,19 +53,16 @@ class DraftsController < ApplicationController
       render :back
     end
   end
-  
+
   private
-  
+
   def correct_user
     @draft = Draft.find_by(novel_id: params[:novel_id], sequential_id: params[:sequential_id])
-    unless @draft.novel.user_id == current_user.id
-      redirect_to root_url
-    end
+    redirect_to root_url unless @draft.novel.user_id == current_user.id
   end
-  
+
   def draft_params
     params.require(:draft).permit(:subtitle, :preface, :postscript, :text)
   end
-  
 end
 
