@@ -57,7 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'capybara'
   gem 'pry-byebug'
-  gem "simplecov"
+  gem "simplecov", require: false
 end
 
 group :development do

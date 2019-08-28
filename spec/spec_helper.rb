@@ -16,6 +16,7 @@
 
 require "capybara/rspec"
 require 'simplecov'
+SimpleCov.start "rails"
 
 RSpec.configure do |config|
   ENV['RAILS_ENV'] = 'test'
@@ -26,7 +27,6 @@ RSpec.configure do |config|
     dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
     SimpleCov.coverage_dir(dir)
   end
-  SimpleCov.start "rails"
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
