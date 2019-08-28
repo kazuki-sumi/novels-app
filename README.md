@@ -1,5 +1,5 @@
 # README
-
+https://img.shields.io/github/forks/kazuki-sumi/novels-app
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
