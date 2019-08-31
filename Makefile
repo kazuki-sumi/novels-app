@@ -6,3 +6,7 @@ run:
 .PHONY: stop
 stop:
 	brew services stop mysql@5.6
+
+.PHONY: coverage
+coverage:
+	open coverage/index.html

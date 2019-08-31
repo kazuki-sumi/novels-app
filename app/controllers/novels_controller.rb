@@ -68,8 +68,6 @@ class NovelsController < ApplicationController
 
   def correct_user
     @novel = current_user.novels.find_by(id: params[:id])
-    unless @novel
-      redirect_to root_url
-    end
+    redirect_to root_url unless @novel
   end
 end

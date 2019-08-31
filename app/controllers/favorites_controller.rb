@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
   before_action :require_user_logged_in
   before_action :current_user
-  
+
   def create
     novel = Novel.find(params[:novel_id])
     current_user.fav(novel)
